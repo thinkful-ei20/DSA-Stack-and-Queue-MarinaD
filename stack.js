@@ -62,13 +62,61 @@ function palindrome(s){
   return false;
 }
 
+function matchingParen(s){
+  //create
+  //loop through string - 
+  //if push all open parenthesis into stack, if close, pop out one of the opens
+  //)) count would be -2
+  const stack = new Stack;
+  let count = 0;
+  for ( let i = 0; i < s.length; i++){
+    if (s[i] === '('){
+      count++;
+      stack.push(s[i]);
+    }
+    if (s[i] === ')'){
+      count --;
+      stack.pop();
+    }
+  }
+  if (count === 0) {
+    return true;
+  }
+  if (count > 0){
+    throw new Error(`Expected close parethesis after the open parenthesis at position: ${count}`);
+  }
+  if (count < 0){
+    throw new Error(`Expected open parethesis before the closed parenthesis at position: ${s.length+count}`);
+  }
+  console.log(count);
+}
+
+function sortStack(stack){
+  const sorted = new Stack;
+  while(stack.top){
+    let saved = stack.pop();
+    while (sorted.top && sorted.top.data > saved){
+      stack.push(sorted.pop());
+    }
+    sorted.push(saved);    
+  }
+
+  while (sorted.top){
+    stack.push(sorted.pop());
+  }
+  return stack;
+}
+
 function main(){
   const starTrek = new Stack;
-  starTrek.push('Kirk');
-  starTrek.push('Spock');
-  starTrek.push('McCoy');
-  starTrek.push('Scotty');
-  console.log(palindrome('1001'));
+  starTrek.push(3);
+  starTrek.push(1);
+  starTrek.push(10);
+  starTrek.push(2);
+  // console.log(palindrome('1001'));
+  // matchingParen('((()))))');
+  // display(sortStack(starTrek));
+
 }
 
 main();
