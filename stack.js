@@ -46,15 +46,30 @@ function display(stack){
   return;
 }
 
+function palindrome(s){
+  const origStr = s.toLowerCase().replace(/[^a-zA-Z0-9]/g,'');
+  const stack = new Stack;
+  for (let i = 0; i < origStr.length; i++){
+    stack.push(origStr[i]);
+  }
+  let reverseStr = '';
+  for (let i = 0; i < origStr.length; i++){
+    reverseStr  += stack.pop();
+  }
+  if (reverseStr === origStr){
+    return true;
+  }
+  return false;
+}
+
 function main(){
   const starTrek = new Stack;
   starTrek.push('Kirk');
   starTrek.push('Spock');
   starTrek.push('McCoy');
   starTrek.push('Scotty');
-  starTrek.pop();
-  console.log(starTrek.pop());
-  // display(starTrek);
+  console.log(palindrome('1001'));
 }
 
 main();
+
