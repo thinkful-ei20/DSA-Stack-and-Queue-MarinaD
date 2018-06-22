@@ -76,8 +76,40 @@ function display(queue){
   }
 }
 
-function squareDance(q){
-  
+function squareDance(people){
+  // input is a list of objects - an array.
+  // output a series of console logs
+  //create a queue called spares
+  // loop through array
+  //first loop, check if current person and next person in array
+  // match
+  // if they match - send console log and keep
+  // if they don't match- enque into spares queue
+  // check next one agaist first person in queue
+
+  const spares = new Queue;
+  spares.enqueue(people[0]);
+  let count = 0;
+  for (let i = 1; i < people.length; i++){
+    if (!spares.first){
+      spares.enqueue(people[i]);
+      count++;
+    }
+    let spare = spares.first.value;
+    if (people[i].gender !== spare.gender){
+      console.log(`${spare.gender} dancer is ${spare.name} and ${people[i].gender} dancer is ${people[i].name}`);
+      spares.dequeue(spare);
+      count--;
+    }
+    else {
+      spares.enqueue(people[i]);
+      count++;
+    }   
+  }
+  if (count > 0){
+    console.log(`there are ${count} ${spares.first.value.gender} dancers waiting to dance.`);
+  }
+
 }
 
 function main(){
@@ -92,14 +124,49 @@ function main(){
   // starTrekQ.dequeue();
   // starTrekQ.dequeue();
   // display(starTrekQ);
-  const sq = new StackQueue;
-  sq.enqueue(1);
-  sq.enqueue(2);
-  sq.enqueue(3);
-  console.log(sq);
-  console.log(JSON.stringify(sq.dequeue()));
-  console.log(sq.dequeue());
-  console.log(JSON.stringify(sq.dequeue()));
+  // const sq = new StackQueue;
+  // sq.enqueue(1);
+  // sq.enqueue(2);
+  // sq.enqueue(3);
+  // console.log(sq);
+  // console.log(JSON.stringify(sq.dequeue()));
+  // console.log(sq.dequeue());
+  // console.log(JSON.stringify(sq.dequeue()));
+  const people = [
+    {
+      name: 'John',
+      gender: 'Male'
+    },
+    {
+      name: 'Alex',
+      gender: 'Male'
+    },
+    {
+      name:'Jane',
+      gender: 'Female'
+    },
+    {
+      name : 'Madonna',
+      gender: 'Female'
+    },
+    {
+      name : 'Rachel',
+      gender: 'Female'
+    },
+    {
+      name : 'Rachel',
+      gender: 'Female'
+    },
+    {
+      name : 'Rachel',
+      gender: 'Female'
+    },
+    {
+      name: 'Alex',
+      gender: 'Male'
+    }
+  ];
+  squareDance(people);
 }
 
 main();
